@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Innovation Challenge Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="brand">Innovation Challenge Management System</div>
+        <nav>
+            <a href="#announcements">Announcements</a>
+            <a href="#challenges">Challenges</a>
+            <a href="#leaderboard">Leaderboard</a>
+            <a href="#register">Register</a>
+            <a href="#submit">Submit Idea</a>
+            <a href="#evaluate">Evaluate</a>
+        </nav>
+    </header>
+
+    <main class="container">
+
+    <!-- Announcements Banner -->
+        <section id="announcements" class="card highlight-card">
+            <h2>Broadcasts & Results</h2>
+            <div id="announcementList"></div>
+        </section>
+
+        <div class="grid-two-col">
+        <!-- User Registration Form -->
+            <section id="register" class="card">
+                <h3>Portal Registration</h3>
+                <p class="subtext">Join as an Organization (to host & evaluate) or Participant (to submit solutions).</p>
+                <form id="registerForm">
+                    <input type="text" id="regName" placeholder="Full Name or Organization Name" required>
+                    <input type="email" id="regEmail" placeholder="Email Address" required>
+                    <select id="regRole" required>
+                        <option value="participant">Participant</option>
+                        <option value="organization">Organization</option>
+                    </select>
+                    <textarea id="regBio" placeholder="Bio & Evaluation Criteria (For organizations: detail criteria breakdown)"></textarea>
+                    <button type="submit" class="btn primary">Register Account</button>
+                </form>
+            </section>
+
+        <!-- Post a Challenge Form -->
+            <section id="createChallenge" class="card">
+                <h3>Host a Challenge</h3>
+                <p class="subtext">Available to registered organizations.</p>
+                <form id="challengeForm">
+                    <select id="chOrgSelect" required>
+                        <option value="">Select Hosting Organization</option>
+                    </select>
+                    <input type="text" id="chTitle" placeholder="Challenge Title" required>
+                    <textarea id="chProblem" placeholder="Problem Statement" required></textarea>
+                    <textarea id="chCriteria" placeholder="Challenge Specific Evaluation Criteria" required></textarea>
+                    <label>Deadline:</label>
+                    <input type="date" id="chDeadline" required>
+                    <button type="submit" class="btn primary">Publish Challenge</button>
+                </form>
+            </section>
+        </div>
+
+    <!-- Active Challenges & Organization Directory -->
+        <section id="challenges" class="card">
+            <h2>Active Challenges & Host Criteria</h2>
+            <div id="challengeList" class="cards-grid"></div>
+        </section>
+
+    <!-- Submission Form -->
+        <section id="submit" class="card">
+            <h2>Submit Your Innovation Proposal</h2>
+            <form id="submissionForm">
+                <div class="form-row">
+                    <select id="subChallengeSelect" required>
+                        <option value="">Select Challenge</option>
+                    </select>
+                    <select id="subParticipantSelect" required>
+                        <option value="">Select Participant</option>
+                    </select>
+                </div>
+                <input type="text" id="subTitle" placeholder="Idea Title" required>
+                <textarea id="subSummary" placeholder="Idea Summary & Description" required></textarea>
+                <div class="form-row">
+                    <select id="subType" required>
+                        <option value="website">Live Website URL</option>
+                        <option value="video">Video Pitch / Demo Link</option>
+                        <option value="documentation">Documentation / PDF Link</option>
+                        <option value="repository">GitHub / Code Repository</option>
+                        <option value="other">Other Deliverable</option>
+                    </select>
+                    <input type="url" id="subUrl" placeholder="Deliverable URL (https://...)" required>
+                </div>
+                <button type="submit" class="btn primary">Submit Proposal</button>
+            </form>
+        </section>
+
+    <!-- Submissions Evaluation Desk -->
+        <section id="evaluate" class="card">
+            <h2>Organization Evaluation Desk</h2>
+            <p class="subtext">Score submissions from 0 to 100 based on published criteria.</p>
+            <div id="submissionList" class="table-container"></div>
+        </section>
+
+    <!-- Public Leaderboard -->
+        <section id="leaderboard" class="card">
+            <h2>Official Challenge Leaderboard</h2>
+            <p class="subtext">Ranked results published across all active challenges.</p>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Project Title</th>
+                        <th>Participant</th>
+                        <th>Challenge</th>
+                        <th>Deliverable</th>
+                        <th>Score</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboardBody"></tbody>
+            </table>
+        </section>
+
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
